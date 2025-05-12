@@ -1,0 +1,1 @@
+#trong manage.py có sử dụng dòng dưới, nếu set mặc định là dev thì chạy trên môi trường 
