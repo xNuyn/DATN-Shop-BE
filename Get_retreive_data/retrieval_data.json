@@ -1,0 +1,386 @@
+[
+  {
+    "metadata": {
+      "id_sub_product": 1,
+      "name_product": "Samsung Galaxy S21",
+      "category": "Điện thoại",
+      "brand": "Samsung",
+      "image_url": "image_s21.jpg",
+      "color": "Trắng",
+      "size": "128GB",
+      "price": 17421037,
+      "stock": 72,
+      "sold_per_month": 0,
+      "sub_image_url": "samsung_galaxy_s21_0.jpg"
+    },
+    "content": "Samsung Galaxy S21 - Samsung (Trắng, 128GB)\nSamsung Galaxy S21 là dòng điện thoại cao cấp với thiết kế hiện đại, sở hữu màn hình Dynamic AMOLED 2X 6.2 inch sắc nét, hiệu năng mạnh mẽ với chip Exynos 2100 và hệ thống 3 camera linh hoạt, phù hợp cho cả công việc và giải trí.\nSamsung Galaxy S21, màu Trắng, bộ nhớ trong 128GB, màn hình Dynamic AMOLED 2X 6.2 inch, camera sau 64MP + 12MP + 12MP, chip Exynos 2100, RAM 8GB, pin 4000mAh, hỗ trợ 5G."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 2,
+      "name_product": "Samsung Galaxy S21",
+      "category": "Điện thoại",
+      "brand": "Samsung",
+      "image_url": "image_s21.jpg",
+      "color": "Đỏ",
+      "size": "512GB",
+      "price": 13950160,
+      "stock": 70,
+      "sold_per_month": 0,
+      "sub_image_url": "samsung_galaxy_s21_1.jpg"
+    },
+    "content": "Samsung Galaxy S21 - Samsung (Đỏ, 512GB)\nSamsung Galaxy S21 là dòng điện thoại cao cấp với thiết kế hiện đại, sở hữu màn hình Dynamic AMOLED 2X 6.2 inch sắc nét, hiệu năng mạnh mẽ với chip Exynos 2100 và hệ thống 3 camera linh hoạt, phù hợp cho cả công việc và giải trí.\nSamsung Galaxy S21, màu Đỏ, bộ nhớ trong 512GB, màn hình Dynamic AMOLED 2X 6.2 inch, camera sau 64MP + 12MP + 12MP, chip Exynos 2100, RAM 8GB, pin 4000mAh, hỗ trợ 5G."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 3,
+      "name_product": "Samsung Galaxy S21",
+      "category": "Điện thoại",
+      "brand": "Samsung",
+      "image_url": "image_s21.jpg",
+      "color": "Trắng",
+      "size": "128GB",
+      "price": 21560494,
+      "stock": 26,
+      "sold_per_month": 0,
+      "sub_image_url": "samsung_galaxy_s21_2.jpg"
+    },
+    "content": "Samsung Galaxy S21 - Samsung (Trắng, 128GB)\nSamsung Galaxy S21 là dòng điện thoại cao cấp với thiết kế hiện đại, sở hữu màn hình Dynamic AMOLED 2X 6.2 inch sắc nét, hiệu năng mạnh mẽ với chip Exynos 2100 và hệ thống 3 camera linh hoạt, phù hợp cho cả công việc và giải trí.\nSamsung Galaxy S21, màu Trắng, bộ nhớ trong 128GB, màn hình Dynamic AMOLED 2X 6.2 inch, camera sau 64MP + 12MP + 12MP, chip Exynos 2100, RAM 8GB, pin 4000mAh, hỗ trợ 5G."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 4,
+      "name_product": "iPhone 13",
+      "category": "Điện thoại",
+      "brand": "iPhone",
+      "image_url": "image_iphone13.jpg",
+      "color": "Trắng",
+      "size": "256GB",
+      "price": 21863877,
+      "stock": 75,
+      "sold_per_month": 0,
+      "sub_image_url": "iphone_13_0.jpg"
+    },
+    "content": "iPhone 13 - iPhone (Trắng, 256GB)\niPhone 13 đến từ Apple sở hữu thiết kế tinh tế với khung viền phẳng hiện đại, sử dụng chip A15 Bionic mạnh mẽ, thời lượng pin cải thiện đáng kể và camera kép 12MP hỗ trợ chế độ chụp ảnh ban đêm sắc nét, mang lại trải nghiệm mượt mà cho người dùng.\niPhone 13 bản màu Trắng, bộ nhớ trong 256GB, màn hình Super Retina XDR 6.1 inch, chip A15 Bionic, camera kép 12MP, hỗ trợ 5G, Face ID, sạc nhanh 20W."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 5,
+      "name_product": "iPhone 13",
+      "category": "Điện thoại",
+      "brand": "iPhone",
+      "image_url": "image_iphone13.jpg",
+      "color": "Xanh",
+      "size": "64GB",
+      "price": 25023602,
+      "stock": 57,
+      "sold_per_month": 0,
+      "sub_image_url": "iphone_13_1.jpg"
+    },
+    "content": "iPhone 13 - iPhone (Xanh, 64GB)\niPhone 13 đến từ Apple sở hữu thiết kế tinh tế với khung viền phẳng hiện đại, sử dụng chip A15 Bionic mạnh mẽ, thời lượng pin cải thiện đáng kể và camera kép 12MP hỗ trợ chế độ chụp ảnh ban đêm sắc nét, mang lại trải nghiệm mượt mà cho người dùng.\niPhone 13 bản màu Xanh, bộ nhớ trong 64GB, màn hình Super Retina XDR 6.1 inch, chip A15 Bionic, camera kép 12MP, Face ID, hỗ trợ quay video 4K."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 6,
+      "name_product": "iPhone 13",
+      "category": "Điện thoại",
+      "brand": "iPhone",
+      "image_url": "image_iphone13.jpg",
+      "color": "Xanh",
+      "size": "64GB",
+      "price": 20715629,
+      "stock": 58,
+      "sold_per_month": 0,
+      "sub_image_url": "iphone_13_2.jpg"
+    },
+    "content": "iPhone 13 - iPhone (Xanh, 64GB)\niPhone 13 đến từ Apple sở hữu thiết kế tinh tế với khung viền phẳng hiện đại, sử dụng chip A15 Bionic mạnh mẽ, thời lượng pin cải thiện đáng kể và camera kép 12MP hỗ trợ chế độ chụp ảnh ban đêm sắc nét, mang lại trải nghiệm mượt mà cho người dùng.\niPhone 13 bản màu Xanh, bộ nhớ trong 64GB, màn hình OLED 6.1 inch, chip A15 Bionic mạnh mẽ, dung lượng pin cải tiến, hỗ trợ MagSafe và iOS mới nhất."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 7,
+      "name_product": "Xiaomi Mi 11",
+      "category": "Điện thoại",
+      "brand": "Xiaomi",
+      "image_url": "image_mi11.jpg",
+      "color": "Đen",
+      "size": "64GB",
+      "price": 25696415,
+      "stock": 39,
+      "sold_per_month": 0,
+      "sub_image_url": "xiaomi_mi_11_0.jpg"
+    },
+    "content": "Xiaomi Mi 11 - Xiaomi (Đen, 64GB)\nXiaomi Mi 11 là smartphone cao cấp với màn hình AMOLED 2K+ hỗ trợ 120Hz, chip Snapdragon 888 mạnh mẽ, camera 108MP chụp ảnh sắc nét cùng thiết kế mỏng nhẹ tinh tế, mang lại hiệu năng vượt trội trong phân khúc giá.\nXiaomi Mi 11 bản màu Đen, bộ nhớ trong 64GB, màn hình AMOLED 6.81 inch, độ phân giải WQHD+, chip Snapdragon 888, camera chính 108MP, pin 4600mAh, hỗ trợ sạc nhanh 55W."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 8,
+      "name_product": "Xiaomi Mi 11",
+      "category": "Điện thoại",
+      "brand": "Xiaomi",
+      "image_url": "image_mi11.jpg",
+      "color": "Trắng",
+      "size": "64GB",
+      "price": 21234678,
+      "stock": 60,
+      "sold_per_month": 0,
+      "sub_image_url": "xiaomi_mi_11_1.jpg"
+    },
+    "content": "Xiaomi Mi 11 - Xiaomi (Trắng, 64GB)\nXiaomi Mi 11 là smartphone cao cấp với màn hình AMOLED 2K+ hỗ trợ 120Hz, chip Snapdragon 888 mạnh mẽ, camera 108MP chụp ảnh sắc nét cùng thiết kế mỏng nhẹ tinh tế, mang lại hiệu năng vượt trội trong phân khúc giá.\nXiaomi Mi 11 bản màu Trắng, bộ nhớ trong 64GB, màn hình 120Hz AMOLED, chip Snapdragon 888, camera 108MP AI, loa Harman Kardon, pin 4600mAh với sạc nhanh không dây."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 9,
+      "name_product": "Xiaomi Mi 11",
+      "category": "Điện thoại",
+      "brand": "Xiaomi",
+      "image_url": "image_mi11.jpg",
+      "color": "Trắng",
+      "size": "256GB",
+      "price": 16232411,
+      "stock": 85,
+      "sold_per_month": 0,
+      "sub_image_url": "xiaomi_mi_11_2.jpg"
+    },
+    "content": "Xiaomi Mi 11 - Xiaomi (Trắng, 256GB)\nXiaomi Mi 11 là smartphone cao cấp với màn hình AMOLED 2K+ hỗ trợ 120Hz, chip Snapdragon 888 mạnh mẽ, camera 108MP chụp ảnh sắc nét cùng thiết kế mỏng nhẹ tinh tế, mang lại hiệu năng vượt trội trong phân khúc giá.\nXiaomi Mi 11 bản màu Trắng, bộ nhớ trong 256GB, chip Snapdragon 888, camera 108MP + 13MP + 5MP, màn hình cong AMOLED 6.81 inch, pin 4600mAh, sạc nhanh 55W."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 10,
+      "name_product": "Oppo F19",
+      "category": "Điện thoại",
+      "brand": "Oppo",
+      "image_url": "image_oppoF19.jpg",
+      "color": "Trắng",
+      "size": "64GB",
+      "price": 19298355,
+      "stock": 42,
+      "sold_per_month": 0,
+      "sub_image_url": "oppo_f19_0.jpg"
+    },
+    "content": "Oppo F19 - Oppo (Trắng, 64GB)\nOppo F19 nổi bật với thiết kế mỏng nhẹ, màn hình AMOLED 6.43 inch sắc nét, pin dung lượng 5000mAh đi kèm sạc nhanh 33W, và cụm camera AI giúp người dùng chụp ảnh chất lượng trong nhiều điều kiện ánh sáng khác nhau.\nOppo F19 bản màu Trắng, bộ nhớ trong 64GB, màn hình AMOLED 6.43 inch, pin 5000mAh, camera sau 48MP + 2MP + 2MP, chip Snapdragon 662, hỗ trợ sạc nhanh 33W."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 11,
+      "name_product": "Oppo F19",
+      "category": "Điện thoại",
+      "brand": "Oppo",
+      "image_url": "image_oppoF19.jpg",
+      "color": "Đen",
+      "size": "256GB",
+      "price": 23766799,
+      "stock": 60,
+      "sold_per_month": 0,
+      "sub_image_url": "oppo_f19_1.jpg"
+    },
+    "content": "Oppo F19 - Oppo (Đen, 256GB)\nOppo F19 nổi bật với thiết kế mỏng nhẹ, màn hình AMOLED 6.43 inch sắc nét, pin dung lượng 5000mAh đi kèm sạc nhanh 33W, và cụm camera AI giúp người dùng chụp ảnh chất lượng trong nhiều điều kiện ánh sáng khác nhau.\nOppo F19 bản màu Đen, bộ nhớ trong 256GB, màn hình AMOLED 6.43 inch FHD+, chip Qualcomm Snapdragon, camera 48MP AI, pin dung lượng cao 5000mAh, hỗ trợ sạc nhanh."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 12,
+      "name_product": "Oppo F19",
+      "category": "Điện thoại",
+      "brand": "Oppo",
+      "image_url": "image_oppoF19.jpg",
+      "color": "Trắng",
+      "size": "256GB",
+      "price": 20286500,
+      "stock": 29,
+      "sold_per_month": 0,
+      "sub_image_url": "oppo_f19_2.jpg"
+    },
+    "content": "Oppo F19 - Oppo (Trắng, 256GB)\nOppo F19 nổi bật với thiết kế mỏng nhẹ, màn hình AMOLED 6.43 inch sắc nét, pin dung lượng 5000mAh đi kèm sạc nhanh 33W, và cụm camera AI giúp người dùng chụp ảnh chất lượng trong nhiều điều kiện ánh sáng khác nhau.\nOppo F19 bản màu Trắng, bộ nhớ trong 256GB, màn hình tràn viền AMOLED, camera sau AI triple 48MP, RAM lớn, pin 5000mAh, tích hợp cảm biến vân tay dưới màn hình."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 13,
+      "name_product": "Dell XPS 13",
+      "category": "Laptop",
+      "brand": "Dell",
+      "image_url": "image_dellXPS13.jpg",
+      "color": "Đỏ",
+      "size": "64GB",
+      "price": 17966284,
+      "stock": 63,
+      "sold_per_month": 0,
+      "sub_image_url": "dell_xps_13_0.jpg"
+    },
+    "content": "Dell XPS 13 - Dell (Đỏ, 64GB)\nDell XPS 13 là dòng laptop cao cấp nổi bật với thiết kế kim loại nguyên khối, màn hình InfinityEdge 13.4 inch viền mỏng, độ phân giải cao, hiệu năng mạnh mẽ với chip Intel thế hệ 11 và thời lượng pin ấn tượng, phù hợp cho người dùng doanh nhân và sáng tạo nội dung.\nDell XPS 13 bản màu Đỏ, bộ nhớ trong 64GB, màn hình InfinityEdge 13.3 inch FHD+, chip Intel Core i5 thế hệ 11, RAM 8GB, pin lâu, thiết kế vỏ nhôm nguyên khối cao cấp."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 14,
+      "name_product": "Dell XPS 13",
+      "category": "Laptop",
+      "brand": "Dell",
+      "image_url": "image_dellXPS13.jpg",
+      "color": "Đỏ",
+      "size": "64GB",
+      "price": 19269607,
+      "stock": 40,
+      "sold_per_month": 0,
+      "sub_image_url": "dell_xps_13_1.jpg"
+    },
+    "content": "Dell XPS 13 - Dell (Đỏ, 64GB)\nDell XPS 13 là dòng laptop cao cấp nổi bật với thiết kế kim loại nguyên khối, màn hình InfinityEdge 13.4 inch viền mỏng, độ phân giải cao, hiệu năng mạnh mẽ với chip Intel thế hệ 11 và thời lượng pin ấn tượng, phù hợp cho người dùng doanh nhân và sáng tạo nội dung.\nDell XPS 13 bản màu Đỏ, bộ nhớ trong 64GB, sử dụng CPU Intel Core i7, màn hình cảm ứng FHD+, card đồ họa Intel Iris Xe, ổ SSD tốc độ cao, thiết kế siêu mỏng nhẹ."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 15,
+      "name_product": "Dell XPS 13",
+      "category": "Laptop",
+      "brand": "Dell",
+      "image_url": "image_dellXPS13.jpg",
+      "color": "Trắng",
+      "size": "64GB",
+      "price": 24024033,
+      "stock": 49,
+      "sold_per_month": 0,
+      "sub_image_url": "dell_xps_13_2.jpg"
+    },
+    "content": "Dell XPS 13 - Dell (Trắng, 64GB)\nDell XPS 13 là dòng laptop cao cấp nổi bật với thiết kế kim loại nguyên khối, màn hình InfinityEdge 13.4 inch viền mỏng, độ phân giải cao, hiệu năng mạnh mẽ với chip Intel thế hệ 11 và thời lượng pin ấn tượng, phù hợp cho người dùng doanh nhân và sáng tạo nội dung.\nDell XPS 13 bản màu Trắng, bộ nhớ trong 64GB, màn hình 13.3 inch UltraSharp, chip Intel Gen 11, Thunderbolt 4, bảo mật vân tay, pin dùng cả ngày, máy siêu mỏng nhẹ."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 16,
+      "name_product": "Acer Aspire 5",
+      "category": "Laptop",
+      "brand": "Acer",
+      "image_url": "image_acerAspire5.jpg",
+      "color": "Xanh",
+      "size": "64GB",
+      "price": 17598349,
+      "stock": 40,
+      "sold_per_month": 0,
+      "sub_image_url": "acer_aspire_5_0.jpg"
+    },
+    "content": "Acer Aspire 5 - Acer (Xanh, 64GB)\nAcer Aspire 5 là laptop tầm trung sở hữu hiệu năng ổn định với bộ vi xử lý AMD Ryzen hoặc Intel Core, màn hình 15.6 inch Full HD, thiết kế đơn giản, chắc chắn, phù hợp cho học sinh, sinh viên hoặc người dùng văn phòng.\nAcer Aspire 5 bản màu Xanh, bộ nhớ trong 64GB, màn hình 15.6 inch FHD IPS, CPU AMD Ryzen 5, RAM 8GB DDR4, ổ SSD, bàn phím có đèn nền, pin lâu."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 17,
+      "name_product": "Acer Aspire 5",
+      "category": "Laptop",
+      "brand": "Acer",
+      "image_url": "image_acerAspire5.jpg",
+      "color": "Xanh",
+      "size": "128GB",
+      "price": 17501702,
+      "stock": 72,
+      "sold_per_month": 0,
+      "sub_image_url": "acer_aspire_5_1.jpg"
+    },
+    "content": "Acer Aspire 5 - Acer (Xanh, 128GB)\nAcer Aspire 5 là laptop tầm trung sở hữu hiệu năng ổn định với bộ vi xử lý AMD Ryzen hoặc Intel Core, màn hình 15.6 inch Full HD, thiết kế đơn giản, chắc chắn, phù hợp cho học sinh, sinh viên hoặc người dùng văn phòng.\nAcer Aspire 5 bản màu Xanh, bộ nhớ trong 128GB, chip Intel Core i5 thế hệ 10, màn hình 15.6 inch IPS FHD, RAM 8GB, ổ SSD M.2 tốc độ cao, cổng USB-C hiện đại."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 18,
+      "name_product": "Acer Aspire 5",
+      "category": "Laptop",
+      "brand": "Acer",
+      "image_url": "image_acerAspire5.jpg",
+      "color": "Trắng",
+      "size": "512GB",
+      "price": 23805386,
+      "stock": 69,
+      "sold_per_month": 0,
+      "sub_image_url": "acer_aspire_5_2.jpg"
+    },
+    "content": "Acer Aspire 5 - Acer (Trắng, 512GB)\nAcer Aspire 5 là laptop tầm trung sở hữu hiệu năng ổn định với bộ vi xử lý AMD Ryzen hoặc Intel Core, màn hình 15.6 inch Full HD, thiết kế đơn giản, chắc chắn, phù hợp cho học sinh, sinh viên hoặc người dùng văn phòng.\nAcer Aspire 5 bản màu Trắng, bộ nhớ trong 512GB, màn hình FHD 15.6 inch, chip Intel Core i7, card đồ họa tích hợp, RAM 16GB, hỗ trợ sạc nhanh, pin lên đến 8 giờ."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 19,
+      "name_product": "Asus ZenBook 14",
+      "category": "Laptop",
+      "brand": "Asus",
+      "image_url": "image_asusZenbook14.jpg",
+      "color": "Đen",
+      "size": "256GB",
+      "price": 17039995,
+      "stock": 60,
+      "sold_per_month": 0,
+      "sub_image_url": "asus_zenbook_14_0.jpg"
+    },
+    "content": "Asus ZenBook 14 - Asus (Đen, 256GB)\nAsus ZenBook 14 là mẫu ultrabook siêu mỏng nhẹ với vỏ kim loại sang trọng, chip Intel thế hệ mới, màn hình 14 inch viền mỏng NanoEdge sắc nét và bàn di chuột tích hợp NumberPad thông minh, là sự lựa chọn lý tưởng cho người dùng di chuyển nhiều.\nAsus ZenBook 14 bản màu Đen, bộ nhớ trong 256GB, màn hình NanoEdge 14 inch FHD, chip AMD Ryzen 7, RAM 8GB, card đồ họa tích hợp, vỏ kim loại, pin dùng lâu."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 20,
+      "name_product": "Asus ZenBook 14",
+      "category": "Laptop",
+      "brand": "Asus",
+      "image_url": "image_asusZenbook14.jpg",
+      "color": "Trắng",
+      "size": "512GB",
+      "price": 21001367,
+      "stock": 45,
+      "sold_per_month": 0,
+      "sub_image_url": "asus_zenbook_14_1.jpg"
+    },
+    "content": "Asus ZenBook 14 - Asus (Trắng, 512GB)\nAsus ZenBook 14 là mẫu ultrabook siêu mỏng nhẹ với vỏ kim loại sang trọng, chip Intel thế hệ mới, màn hình 14 inch viền mỏng NanoEdge sắc nét và bàn di chuột tích hợp NumberPad thông minh, là sự lựa chọn lý tưởng cho người dùng di chuyển nhiều.\nAsus ZenBook 14 bản màu Trắng, bộ nhớ trong 512GB, CPU Intel Core i7 thế hệ 11, màn hình OLED FHD, RAM 16GB, Thunderbolt 4, chuẩn Intel Evo, cực nhẹ chỉ 1.1kg."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 21,
+      "name_product": "Asus ZenBook 14",
+      "category": "Laptop",
+      "brand": "Asus",
+      "image_url": "image_asusZenbook14.jpg",
+      "color": "Đen",
+      "size": "128GB",
+      "price": 24310376,
+      "stock": 94,
+      "sold_per_month": 0,
+      "sub_image_url": "asus_zenbook_14_2.jpg"
+    },
+    "content": "Asus ZenBook 14 - Asus (Đen, 128GB)\nAsus ZenBook 14 là mẫu ultrabook siêu mỏng nhẹ với vỏ kim loại sang trọng, chip Intel thế hệ mới, màn hình 14 inch viền mỏng NanoEdge sắc nét và bàn di chuột tích hợp NumberPad thông minh, là sự lựa chọn lý tưởng cho người dùng di chuyển nhiều.\nAsus ZenBook 14 bản màu Đen, bộ nhớ trong 128GB, màn hình chống chói 14 inch FHD, chip Intel Core i5, ổ SSD NVMe, RAM 8GB, bàn phím backlit, bảo mật vân tay."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 22,
+      "name_product": "MacBook Air",
+      "category": "Laptop",
+      "brand": "Mac",
+      "image_url": "image_macbookAir.jpg",
+      "color": "Trắng",
+      "size": "128GB",
+      "price": 25317435,
+      "stock": 64,
+      "sold_per_month": 0,
+      "sub_image_url": "macbook_air_0.jpg"
+    },
+    "content": "MacBook Air - Mac (Trắng, 128GB)\nMacBook Air phiên bản dùng chip Apple M1 mang lại hiệu năng vượt trội, thời lượng pin lên tới 18 giờ, thiết kế mỏng nhẹ đặc trưng và hệ điều hành macOS mượt mà, là lựa chọn hoàn hảo cho người dùng yêu thích sự ổn định và tối ưu hóa phần cứng.\nMacBook Air bản màu Trắng, bộ nhớ trong 128GB, chip Apple M1, màn hình Retina 13.3 inch, RAM 8GB, pin lên đến 18 giờ, bàn phím Magic Keyboard, bảo mật vân tay."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 23,
+      "name_product": "MacBook Air",
+      "category": "Laptop",
+      "brand": "Mac",
+      "image_url": "image_macbookAir.jpg",
+      "color": "Trắng",
+      "size": "128GB",
+      "price": 17971955,
+      "stock": 86,
+      "sold_per_month": 0,
+      "sub_image_url": "macbook_air_1.jpg"
+    },
+    "content": "MacBook Air - Mac (Trắng, 128GB)\nMacBook Air phiên bản dùng chip Apple M1 mang lại hiệu năng vượt trội, thời lượng pin lên tới 18 giờ, thiết kế mỏng nhẹ đặc trưng và hệ điều hành macOS mượt mà, là lựa chọn hoàn hảo cho người dùng yêu thích sự ổn định và tối ưu hóa phần cứng.\nMacBook Air bản màu Trắng, bộ nhớ trong 128GB, sử dụng chip M1 tốc độ cao, màn hình Retina độ phân giải 2K, không quạt, thiết kế siêu mỏng nhẹ, thời lượng pin ấn tượng."
+  },
+  {
+    "metadata": {
+      "id_sub_product": 24,
+      "name_product": "MacBook Air",
+      "category": "Laptop",
+      "brand": "Mac",
+      "image_url": "image_macbookAir.jpg",
+      "color": "Đen",
+      "size": "256GB",
+      "price": 24731469,
+      "stock": 20,
+      "sold_per_month": 0,
+      "sub_image_url": "macbook_air_2.jpg"
+    },
+    "content": "MacBook Air - Mac (Đen, 256GB)\nMacBook Air phiên bản dùng chip Apple M1 mang lại hiệu năng vượt trội, thời lượng pin lên tới 18 giờ, thiết kế mỏng nhẹ đặc trưng và hệ điều hành macOS mượt mà, là lựa chọn hoàn hảo cho người dùng yêu thích sự ổn định và tối ưu hóa phần cứng.\nMacBook Air bản màu Đen, bộ nhớ trong 256GB, chip Apple M1, GPU 7 nhân, màn hình Retina sắc nét, hỗ trợ Wi-Fi 6, Thunderbolt 3, dung lượng pin đến 18 tiếng."
+  }
+]
