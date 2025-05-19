@@ -12,16 +12,15 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-exzf!&khr%&16x8o-7hjqt1_=jq@*f@t1t=$1e8veh_v!5g)oe'
+JWT_SECRET_KEY = 'django-insecure-exzf!&khr%&16x8o-7hjqt1_=jq@*f@t1t=$1e8veh_v!5g)oe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'authentication',
+    'cloudinary',
+    'cloudinary_storage',
     'users',
     'products',
     'orders',
@@ -48,6 +53,14 @@ INSTALLED_APPS = [
     'compare',
 ]
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dqfrshwt9',
+    'API_KEY': '511663796316183',
+    'API_SECRET': 'LLp_G2sp9YR4RTl2fns0YiSUyO0',
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -57,6 +70,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'authentication.backends.JWTAuthentication',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'config.pagination.CustomPageNumberPagination',
+}
 
 ROOT_URLCONF = 'config.urls'
 

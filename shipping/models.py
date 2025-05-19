@@ -1,5 +1,6 @@
 from django.db import models
 from orders.models import Order
+from app.models import StatusEnum
 
 # ---------------- SHIPMENT ---------------- #
 class Shipment(models.Model):
@@ -17,6 +18,7 @@ class Shipment(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
     delivered_at = models.DateTimeField(null=True, blank=True)  # Thời gian giao hàng thành công
+    status_enum = models.IntegerField(choices=StatusEnum.choices,default=StatusEnum.ACTIVE)
 
     def __str__(self):
         return f"Shipment {self.id} - {self.status}"

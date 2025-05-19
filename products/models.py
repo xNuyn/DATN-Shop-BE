@@ -1,4 +1,5 @@
 from django.db import models
+from app.models import StatusEnum
 
 # ---------------- CATEGORIES ---------------- #
 class Category(models.Model):
@@ -6,6 +7,7 @@ class Category(models.Model):
     parent = models.ForeignKey(
         'self', on_delete=models.SET_NULL, null=True, blank=True, related_name="subcategories"
     )
+    status_enum = models.IntegerField(choices=StatusEnum.choices,default=StatusEnum.ACTIVE)
 
     def __str__(self):
         return self.name
@@ -14,6 +16,7 @@ class Category(models.Model):
 class Brand(models.Model):
     name = models.CharField(max_length=255, unique=True)
     description = models.TextField(null=True, blank=True)
+    status_enum = models.IntegerField(choices=StatusEnum.choices,default=StatusEnum.ACTIVE)
 
     def __str__(self):
         return self.name
@@ -26,6 +29,7 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name="products")
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.TextField(null=True, blank=True)
+    status_enum = models.IntegerField(choices=StatusEnum.choices,default=StatusEnum.ACTIVE)
 
     def __str__(self):
         return self.name
@@ -54,6 +58,7 @@ class SubProduct(models.Model):
     specification = models.TextField(null=True, blank=True)
     discount_percentage = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     saled_per_month = models.IntegerField(default=0, null=False)
+    status_enum = models.IntegerField(choices=StatusEnum.choices,default=StatusEnum.ACTIVE)
 
     def __str__(self):
         return f"{self.product.name} - {self.color} - {self.size}"
@@ -62,6 +67,7 @@ class SubProduct(models.Model):
 class ProductSubProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     sub_product = models.ForeignKey(SubProduct, on_delete=models.CASCADE)
+    status_enum = models.IntegerField(choices=StatusEnum.choices,default=StatusEnum.ACTIVE)
 
     class Meta:
         unique_together = ("product", "sub_product")
