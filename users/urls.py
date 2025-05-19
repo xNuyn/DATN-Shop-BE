@@ -7,6 +7,8 @@ router = DefaultRouter()
 router.register(r'', views.UserViewSet, basename='user')
 
 urlpatterns = [
+    path('search-and', views.UserSearchView.as_view(), name='user-search-and'),
+    path('search-or', views.UserSearchViewOR.as_view(), name='user-search-or'),
     path('', include(router.urls)),
 ]
 
