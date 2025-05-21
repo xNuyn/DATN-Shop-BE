@@ -44,10 +44,10 @@ class SubProduct(models.Model):
         WHITE = "White"
 
     class SizeChoices(models.TextChoices):
-        SMALL = "S"
-        MEDIUM = "M"
-        LARGE = "L"
-        XLARGE = "XL"
+        SMALL = "64GB"
+        MEDIUM = "128GB"
+        LARGE = "256GB"
+        XLARGE = "512GB"
 
     old_price = models.BigIntegerField(null=True, blank=True)
     price = models.BigIntegerField(null=False)

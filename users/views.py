@@ -1,22 +1,12 @@
-from django.shortcuts import render
 from django.db.models import Q
-from django.db import transaction
-from django.utils import timezone
-from django.http import JsonResponse
-from django.db.models import Value, BooleanField
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
 from rest_framework.response import Response
 from rest_framework import viewsets, generics, status
 from rest_framework.exceptions import ValidationError
-from users.serializers import UserSerializer, UserSerializerOutput, UserUpdateSerializer, IdsUserSerializer, ResponseSerializer
+from users.serializers import UserSerializer, UserSerializerOutput, UserUpdateSerializer, IdsUserSerializer
 from users.models import User, StatusEnum
+from app.serializers import ResponseSerializer
 import requests
-from random import sample
-import json
 from rest_framework.decorators import action
-from rest_framework.views import APIView
-from datetime import datetime
 from authentication.permissions import IsCustomerPermission, IsAdminPermission, IsAuthenticatedPermission
 from drf_yasg.utils import swagger_auto_schema
 
@@ -166,8 +156,9 @@ class UserViewSet(viewsets.ModelViewSet):
     )
     def destroy(self, request, *args, **kwargs):
         print("user destroy")
+        pk = request.parser_context['kwargs'].get('pk')
         try:
-            instance = self.get_object()
+            instance = User.objects.get(id=pk)
         except User.DoesNotExist:
             return Response({'detail': 'User not found'}, status=status.HTTP_403_FORBIDDEN)
         instance.delete()
