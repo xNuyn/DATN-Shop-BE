@@ -91,7 +91,6 @@ class UserViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         data = request.data.copy()
 
-        # Nếu có file image thì xử lý upload
         image_file = request.FILES.get('image')
         if image_file:
             try:
@@ -103,7 +102,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 if upload_response.status_code == 200 or upload_response.status_code == 201:
                     image_url = upload_response.json().get('image_url')
                     if image_url:
-                        data['image_url'] = image_url
+                        data['avatar'] = image_url
                     else:
                         return Response({'error': 'Upload thành công nhưng không nhận được URL.'}, status=500)
                 else:
@@ -123,7 +122,7 @@ class UserViewSet(viewsets.ModelViewSet):
         partial = kwargs.pop('partial', True)
         instance = self.get_object()
         data = request.data.copy()
-        # Nếu có file image thì xử lý upload
+        
         image_file = request.FILES.get('image')
         if image_file:
             try:
@@ -135,16 +134,14 @@ class UserViewSet(viewsets.ModelViewSet):
                 if upload_response.status_code == 200 or upload_response.status_code == 201:
                     image_url = upload_response.json().get('image_url')
                     if image_url:
-                        data['image_url'] = image_url
+                        data['avatar'] = image_url
                     else:
                         return Response({'error': 'Upload thành công nhưng không nhận được URL.'}, status=500)
                 else:
                     return Response({'error': 'Lỗi khi upload ảnh.'}, status=upload_response.status_code)
             except Exception as e:
                 return Response({'error': f'Lỗi upload ảnh: {str(e)}'}, status=500)
-        # serializer = self.get_serializer(instance, data=data, partial=partial)
-        # serializer.is_valid(raise_exception=True)
-        # self.perform_update(serializer)
+
         user = UserSerializer(instance, data=data, partial=partial)
         user.is_valid(raise_exception=True)
         user.save()

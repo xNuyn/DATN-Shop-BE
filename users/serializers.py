@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import User
-from django.contrib.auth.hashers import make_password
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,11 +12,6 @@ class UserSerializerOutput(serializers.ModelSerializer):
         model = User
         fields = ('id', 'user_name', 'full_name', 'email', 'avatar', 'phone', 'address', 'region', 'address_billing', 'zip_code', 'note')
         read_only_fields = ('id', 'created_at', 'role')
-
-class UserUpdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        exclude = ('password', 'created_at', 'role')
         
 class UserUpdateSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)

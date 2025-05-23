@@ -23,7 +23,7 @@ class Brand(models.Model):
 
 # ---------------- PRODUCTS ---------------- #
 class Product(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     description = models.TextField(null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products")
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name="products")
@@ -65,8 +65,8 @@ class SubProduct(models.Model):
 
 # ---------------- PRODUCT - SUBPRODUCT RELATION ---------------- #
 class ProductSubProduct(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    sub_product = models.ForeignKey(SubProduct, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="sub_product")
+    sub_product = models.ForeignKey(SubProduct, on_delete=models.CASCADE, related_name="product")
     status_enum = models.IntegerField(choices=StatusEnum.choices,default=StatusEnum.ACTIVE)
 
     class Meta:
