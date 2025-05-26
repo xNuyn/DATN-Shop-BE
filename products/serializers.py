@@ -70,9 +70,19 @@ class SubProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SubProductSerializerOutput(serializers.ModelSerializer):
+    product = serializers.SerializerMethodField()
     class Meta:
         model = SubProduct
-        fields = ('id', 'old_price', 'price', 'color', 'size', 'stock', 'image', 'specification', 'discount_percentage', 'saled_per_month')
+        fields = ('id', 'product', 'old_price', 'price', 'color', 'size', 'stock', 'image', 'specification', 'discount_percentage', 'saled_per_month')
+        
+    def get_product(self, obj):
+        try:
+            product_subproduct = obj.product.select_related('product').first()
+            if product_subproduct:
+                return ProductSerializerOutput(product_subproduct.product).data
+            return None
+        except ProductSubProduct.DoesNotExist:
+            return None
         
 class SubProductUpdateSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)

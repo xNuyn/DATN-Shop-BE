@@ -26,7 +26,7 @@ class Wishlist(models.Model):
     status_enum = models.IntegerField(choices=StatusEnum.choices,default=StatusEnum.ACTIVE)
 
     class Meta:
-        unique_together = ('user', 'sub_product')  # Tránh trùng lặp sản phẩm trong wishlist
+        unique_together = ('user', 'sub_product')
 
     def __str__(self):
         return f"{self.user.user_name} - {self.sub_product.id}"
