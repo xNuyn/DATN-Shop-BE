@@ -8,4 +8,3 @@ router.register(r'review', views.ReviewViewSet, basename='review')
 urlpatterns = [
     path('', include(router.urls)),
 ]
-
