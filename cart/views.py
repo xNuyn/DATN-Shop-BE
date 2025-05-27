@@ -234,22 +234,22 @@ class CartViewSet(viewsets.ModelViewSet):
     # multiple destroy
     @action(detail=False, methods=['get'], url_path='my-cart')
     @swagger_auto_schema(
-        responses={200: CartSerializerOutput}
+        responses={200: CartSerializerOutput(many=True)}
     )
     def my_cart(self, request):
         print('cart my_cart')
 
         user_id = request.user.id
-        print("user_id", user_id)
-        try:
-            carts = Cart.objects.filter(user=user_id)
-        except Cart.DoesNotExist: 
-            return Response({'detail': 'No item found in my cart'}, status=status.HTTP_403_FORBIDDEN) 
-        page = self.paginate_queryset(carts)
+        cartItems = self.queryset.filter(user=user_id, status_enum=StatusEnum.ACTIVE.value)
+
+        if not cartItems.exists():
+            return Response({'detail': 'No item found in my cart'}, status=status.HTTP_404_NOT_FOUND) 
+        page = self.paginate_queryset(cartItems)
         if page is not None:
             cartOutput = CartSerializerOutput(page, many=True)
             return self.get_paginated_response(cartOutput.data)
 
+        cartOutput = CartSerializerOutput(cartItems, many=True)
         return Response(cartOutput.data, status=status.HTTP_200_OK)
 
 class WishlistViewSet(viewsets.ModelViewSet):
@@ -474,21 +474,21 @@ class WishlistViewSet(viewsets.ModelViewSet):
     # multiple destroy
     @action(detail=False, methods=['get'], url_path='my-wishlist')
     @swagger_auto_schema(
-        responses={200: WishlistSerializerOutput}
+        responses={200: WishlistSerializerOutput(many=True)}
     )
     def my_wishlist(self, request):
         print('wishlist my_wishlist')
 
         user_id = request.user.id
-        print("user_id", user_id)
-        try:
-            wishlists = Wishlist.objects.filter(user=user_id)
-        except Wishlist.DoesNotExist: 
-            return Response({'detail': 'No item found in my wishlist'}, status=status.HTTP_403_FORBIDDEN) 
+        wishlists = self.queryset.filter(user=user_id, status_enum=StatusEnum.ACTIVE.value)
+
+        if not wishlists.exists():
+            return Response({'detail': 'No wishlist found in my cart'}, status=status.HTTP_404_NOT_FOUND)
         page = self.paginate_queryset(wishlists)
         if page is not None:
-            wishlistOutput = CartSerializerOutput(page, many=True)
+            wishlistOutput = WishlistSerializerOutput(page, many=True)
             return self.get_paginated_response(wishlistOutput.data)
-
+        
+        wishlistOutput = WishlistSerializerOutput(wishlists, many=True)
         return Response(wishlistOutput.data, status=status.HTTP_200_OK)
     

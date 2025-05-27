@@ -271,20 +271,20 @@ class CompareProductViewSet(viewsets.ModelViewSet):
     # multiple destroy
     @action(detail=False, methods=['get'], url_path='my-compareproduct')
     @swagger_auto_schema(
-        responses={200: CompareProductSerializerOutput}
+        responses={200: CompareProductSerializerOutput(many=True)}
     )
     def my_compareProduct(self, request):
         print('compareProduct my_compareProduct')
 
         user_id = request.user.id
-        print("user_id", user_id)
-        try:
-            compareProducts = CompareProduct.objects.filter(user=user_id)
-        except CompareProduct.DoesNotExist: 
-            return Response({'detail': 'No item found in my compareProduct'}, status=status.HTTP_403_FORBIDDEN) 
+        compareProducts = self.queryset.filter(user=user_id, status_enum=StatusEnum.ACTIVE.value)
+
+        if not compareProducts.exists():
+            return Response({'detail': 'No compare-products found in my cart'}, status=status.HTTP_404_NOT_FOUND) 
         page = self.paginate_queryset(compareProducts)
         if page is not None:
             compareProductOutput = CompareProductSerializerOutput(page, many=True)
             return self.get_paginated_response(compareProductOutput.data)
-
+        
+        compareProductOutput = CompareProductSerializerOutput(compareProducts, many=True)
         return Response(compareProductOutput.data, status=status.HTTP_200_OK)
