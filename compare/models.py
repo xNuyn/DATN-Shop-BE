@@ -5,8 +5,8 @@ from app.models import StatusEnum
 
 # ---------------- COMPARE PRODUCT ---------------- #
 class CompareProduct(models.Model):
-    user = models.ForeignKey("users.User", on_delete=models.CASCADE)
-    sub_product = models.ForeignKey("products.SubProduct", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="compareproduct_items")
+    sub_product = models.ForeignKey(SubProduct, on_delete=models.CASCADE, related_name="compareproduct_items")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status_enum = models.IntegerField(choices=StatusEnum.choices,default=StatusEnum.ACTIVE)
@@ -15,4 +15,4 @@ class CompareProduct(models.Model):
         unique_together = ("user", "sub_product") 
 
     def __str__(self):
-        return f"{self.user.email} compares {self.sub_product.id}"
+        return f"{self.user.user_name} compares {self.sub_product.id}"
