@@ -2,8 +2,8 @@ from django.db import models
 from orders.models import Order
 from app.models import StatusEnum
 
-# ---------------- SHIPMENT ---------------- #
-class Shipment(models.Model):
+# ---------------- SHIPPING ---------------- #
+class Shipping(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('shipped', 'Shipped'),
@@ -12,12 +12,11 @@ class Shipment(models.Model):
         ('delivered', 'Delivered'),
     ]
 
-    order = models.OneToOneField(Order, on_delete=models.CASCADE, related_name="shipment")
-    tracking_number = models.CharField(max_length=30, unique=True, null=True, blank=True)
-    estimate_delivery_date = models.DateField()
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="shippings")
+    tracking_number = models.CharField(max_length=100, unique=True, null=True, blank=True)
+    estimate_delivery_date = models.DateField(null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
-    delivered_at = models.DateTimeField(null=True, blank=True)  # Thời gian giao hàng thành công
     status_enum = models.IntegerField(choices=StatusEnum.choices,default=StatusEnum.ACTIVE)
 
     def __str__(self):

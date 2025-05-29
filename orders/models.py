@@ -30,7 +30,7 @@ class Order(models.Model):
 class OrderDetail(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="order_details")
     sub_product = models.ForeignKey(SubProduct, on_delete=models.CASCADE, related_name="order_details")
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField(default=1)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     status_enum = models.IntegerField(choices=StatusEnum.choices,default=StatusEnum.ACTIVE)
 

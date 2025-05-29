@@ -1,5 +1,9 @@
 from django.db import models
 from app.models import StatusEnum
+    
+class GenderEnum(models.IntegerChoices):
+    MALE = 0, 'Male'
+    FEMALE = 1, 'Female'
 
 class User(models.Model):
     CUSTOMER = "customer"
@@ -17,6 +21,7 @@ class User(models.Model):
     refresh_token = models.CharField(max_length=255, null= True, blank=True)
     avatar = models.TextField(null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
+    gender = models.IntegerField(choices=GenderEnum.choices, default=GenderEnum.MALE)
     address = models.TextField(null=True, blank=True)
     region = models.CharField(max_length=100, null=True, blank=True)
     address_billing = models.TextField(null=True, blank=True)
