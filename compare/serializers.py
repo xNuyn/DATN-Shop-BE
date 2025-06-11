@@ -8,7 +8,7 @@ class CompareProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CompareProductSerializerOutput(serializers.ModelSerializer):
-    sub_product = SubProductSerializerOutput()
+    sub_product = SubProductSerializerForOrder()
     class Meta:
         model = CompareProduct
         fields = ('id', 'user', 'sub_product')

@@ -7,15 +7,19 @@ from rest_framework import viewsets, generics, status
 from rest_framework.exceptions import ValidationError
 from products.models import Product, Category, Brand, SubProduct, ProductSubProduct
 from products.serializers import (
-    ProductSerializer, ProductSerializerOutput, ProductUpdateSerializer, IdsProductSerializer,
+    ProductSerializer, ProductSerializerOutput, ProductUpdateSerializer, IdsProductSerializer, ProductSerializerDetail,
     CategorySerializer, CategorySerializerOutput, CategoryUpdateSerializer, IdsCategorySerializer,
     BrandSerializer, BrandSerializerOutput, BrandUpdateSerializer, IdsBrandSerializer,
-    SubProductSerializer, SubProductSerializerOutput, SubProductUpdateSerializer, IdsSubProductSerializer,
+    SubProductSerializer, SubProductSerializerOutput, SubProductUpdateSerializer, IdsSubProductSerializer, SubProductSerializerForAdmin,
     ProductSubProductSerializer, ProductSubProductSerializerOutput, ProductSubProductUpdateSerializer, IdsProductSubProductSerializer
 )
 from app.serializers import ResponseSerializer
 from app.models import StatusEnum
 from authentication.permissions import IsCustomerPermission, IsAdminPermission, IsAuthenticatedPermission
+from django.db.models import Sum, Min, Max, CharField, Value
+from django.db.models import FilteredRelation
+from django.db.models.functions import Concat
+
 
 def soft_delete_subproduct(sub_product):
     if sub_product.status_enum != StatusEnum.DELETED.value:
@@ -83,8 +87,10 @@ class ProductViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action in ['update', 'partial_update']:
             return ProductUpdateSerializer
-        elif self.action in ['list', 'retrieve']:
-            return ProductSerializer
+        elif self.action in ['list']:
+            return ProductSerializerOutput
+        elif self.action in ['retrieve']:
+            return ProductSerializerDetail
         elif self.action in ['multiple_delete', 'multiple_destroy']:
             return IdsProductSerializer
         return ProductSerializer
@@ -293,26 +299,158 @@ class ProductViewSet(viewsets.ModelViewSet):
         for product in products:
             product.delete()
         return Response({'message': 'Products destroy successfully'}, status=status.HTTP_200_OK)
+   
+   
     
+# class ProductSearchView(generics.ListAPIView):
+#     serializer_class = ProductSerializer
+#     permission_classes = []
+    
+#     def get_all_subcategories(self, parent_category):
+#         subcategories = Category.objects.filter(parent=parent_category)
+#         print("subcategories", subcategories)
+#         all_subcategories = list(subcategories)
+#         print("loi 1")
+#         for subcategory in subcategories:
+#             all_subcategories.extend(self.get_all_subcategories(subcategory))
+#         return all_subcategories
+    
+#     def get_queryset(self):
+#         name = self.request.query_params.get('name', None)
+#         description = self.request.query_params.get('description', None)
+#         category = self.request.query_params.get('category', None)
+#         brand = self.request.query_params.get('brand', None)
+#         sort_by = self.request.query_params.get('sort_by', None)
+        
+        
+#         type_search_name = self.request.query_params.get('type_search_name', None)
+#         type_search_description = self.request.query_params.get('type_search_description', None)
+#         type_search_category = self.request.query_params.get('type_search_category', None)
+#         type_search_brand = self.request.query_params.get('type_search_brand', None)
+                
+#         queryset = Product.objects.all()
+#         queryset = queryset.filter(status_enum=StatusEnum.ACTIVE.value)
+#         queryset = queryset.annotate(
+#             active_sub_products=FilteredRelation(
+#                 'sub_product__sub_product',
+#                 condition=Q(sub_product__sub_product__status_enum=StatusEnum.ACTIVE.value)
+#             ),
+#             sold_per_month=Sum('active_sub_products__saled_per_month'),
+#             min_price=Min('active_sub_products__price'),
+#             max_price=Max('active_sub_products__price')
+#         )
+        
+        
+#         if name:
+#             if type_search_name == 'exact':
+#                 queryset = queryset.filter(name=name)
+#             elif type_search_name == 'contains':
+#                 queryset = queryset.filter(name__icontains=name)
+#             elif type_search_name == 'startswith':
+#                 queryset = queryset.filter(name__istartswith=name)
+#             elif type_search_name == 'endswith':
+#                 queryset = queryset.filter(name__iendswith=name)
+#             else:
+#                 raise ValidationError("Require name type search in ['exact', 'contains', 'startswith', 'endswith']")
+#         if description:
+#             if type_search_description == 'exact':
+#                 queryset = queryset.filter(description=description)
+#             elif type_search_description == 'contains':
+#                 queryset = queryset.filter(description__icontains=description)
+#             elif type_search_description == 'startswith':
+#                 queryset = queryset.filter(description__istartswith=description)
+#             elif type_search_description == 'endswith':
+#                 queryset = queryset.filter(description__iendswith=description)
+#             else:
+#                 raise ValidationError("Require description type search in ['exact', 'contains', 'startswith', 'endswith']")
+
+#         if category and type_search_category:
+#             if type_search_category == 'exact':
+#                 queryset = queryset.filter(category=category)
+#             elif type_search_category == 'contains':
+#                 queryset = queryset.filter(category__icontains=category)
+#             elif type_search_category == 'startswith':
+#                 queryset = queryset.filter(category__istartswith=category)
+#             elif type_search_category == 'endswith':
+#                 queryset = queryset.filter(category__iendswith=category)
+#             elif type_search_category == 'parent':
+#                 all_subcategories = self.get_all_subcategories(category)
+#                 all_subcategories.append(category)
+#                 queryset = queryset.filter(category__in=all_subcategories)
+#             else:
+#                 raise ValidationError("Require category type search in ['exact', 'contains', 'startswith', 'endswith', 'parent']")
+            
+#         if brand:
+#             if type_search_brand == 'exact':
+#                 queryset = queryset.filter(brand=brand)
+#             elif type_search_brand == 'contains':
+#                 queryset = queryset.filter(brand__icontains=brand)
+#             elif type_search_brand == 'startswith':
+#                 queryset = queryset.filter(brand__istartswith=brand)
+#             elif type_search_brand == 'endswith':
+#                 queryset = queryset.filter(brand__iendswith=brand)
+#             else:
+#                 raise ValidationError("Require brand type search in ['exact', 'contains', 'startswith', 'endswith']")
+            
+#         if sort_by:
+#             if sort_by == 'bestseller': 
+#                 queryset = queryset.order_by('-sold_per_month')
+#             elif sort_by == 'lowtohigh':
+#                 queryset = queryset.order_by('min_price')
+#             elif sort_by == 'hightolow':
+#                 queryset = queryset.order_by('-max_price')
+#             else: 
+#                 raise ValidationError("Require sort_by in ['bestseller', 'lowtohigh', 'hightolow']")
+        
+#         return queryset
+    
+    
+#     def list(self, request, *args, **kwargs):
+#         queryset = self.get_queryset()        
+#         page = self.paginate_queryset(queryset)
+#         if page is not None:
+#             serializer = ProductSerializerOutput(page, many=True)
+#             return self.get_paginated_response(serializer.data)
+#         serializer = self.get_serializer(queryset, many=True)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
 class ProductSearchView(generics.ListAPIView):
     serializer_class = ProductSerializer
     permission_classes = []
-    
+
     def get_queryset(self):
         name = self.request.query_params.get('name', None)
         description = self.request.query_params.get('description', None)
-        category = self.request.query_params.get('category', None)
-        brand = self.request.query_params.get('brand', None)
-        
+        categories = self.request.query_params.get('categories', None)
+        brands = self.request.query_params.get('brands', None)
+        sort_by = self.request.query_params.get('sort_by', None)
+        keyword = self.request.query_params.get('keyword', None)
+
         type_search_name = self.request.query_params.get('type_search_name', None)
         type_search_description = self.request.query_params.get('type_search_description', None)
-        type_search_category = self.request.query_params.get('type_search_category', None)
-        type_search_brand = self.request.query_params.get('type_search_brand', None)
-                
-        queryset = Product.objects.all().order_by('id')
-        queryset = queryset.filter(status_enum=StatusEnum.ACTIVE.value)
-        
-        
+        type_search_keyword = self.request.query_params.get('type_search_keyword', None)
+
+        queryset = Product.objects.filter(status_enum=StatusEnum.ACTIVE.value)
+
+        queryset = queryset.annotate(
+            active_sub_products=FilteredRelation(
+                'sub_product__sub_product',
+                condition=Q(sub_product__sub_product__status_enum=StatusEnum.ACTIVE.value)
+            ),
+            sold_per_month=Sum('active_sub_products__saled_per_month'),
+            min_price=Min('active_sub_products__price'),
+            max_price=Max('active_sub_products__price'),
+            text_search=Concat(
+                'name', Value(' '), 
+                'description', Value(' '),
+                'category__parent__name', Value(' '), 
+                'category__name', Value(' '),
+                output_field=CharField()
+            )
+        )
+
         if name:
             if type_search_name == 'exact':
                 queryset = queryset.filter(name=name)
@@ -323,7 +461,8 @@ class ProductSearchView(generics.ListAPIView):
             elif type_search_name == 'endswith':
                 queryset = queryset.filter(name__iendswith=name)
             else:
-                raise ValidationError("Require name type search in ['exact', 'contains', 'startswith', 'endswith]")
+                raise ValidationError("Require name type search in ['exact', 'contains', 'startswith', 'endswith']")
+
         if description:
             if type_search_description == 'exact':
                 queryset = queryset.filter(description=description)
@@ -334,37 +473,59 @@ class ProductSearchView(generics.ListAPIView):
             elif type_search_description == 'endswith':
                 queryset = queryset.filter(description__iendswith=description)
             else:
-                raise ValidationError("Require description type search in ['exact', 'contains', 'startswith', 'endswith]")
+                raise ValidationError("Require description type search in ['exact', 'contains', 'startswith', 'endswith']")
 
-        if category and type_search_category:
-            if type_search_category == 'exact':
-                queryset = queryset.filter(category=category)
-            elif type_search_category == 'contains':
-                queryset = queryset.filter(category__icontains=category)
-            elif type_search_category == 'startswith':
-                queryset = queryset.filter(category__istartswith=category)
-            elif type_search_category == 'endswith':
-                queryset = queryset.filter(category__iendswith=category)
-            else:
-                raise ValidationError("Require category type search in ['exact', 'contains', 'startswith', 'endswith]")
+        if categories:
+            category_ids = [int(c.strip()) for c in categories.split(',') if c.strip().isdigit()]
+            all_ids = set(category_ids)
+            for cid in category_ids:
+                subcats = self.get_all_subcategories(cid)
+                all_ids.update([c.id for c in subcats])
+            queryset = queryset.filter(category__in=all_ids)
+
+        if brands:
+            subcategory_ids = [int(b.strip()) for b in brands.split(',') if b.strip().isdigit()]
             
-        if brand:
-            if type_search_brand == 'exact':
-                queryset = queryset.filter(brand=brand)
-            elif type_search_brand == 'contains':
-                queryset = queryset.filter(brand__icontains=brand)
-            elif type_search_brand == 'startswith':
-                queryset = queryset.filter(brand__istartswith=brand)
-            elif type_search_brand == 'endswith':
-                queryset = queryset.filter(brand__iendswith=brand)
+            all_subcategory_ids = set(subcategory_ids)
+            for cid in subcategory_ids:
+                subcats = self.get_all_subcategories(cid)
+                all_subcategory_ids.update([c.id for c in subcats])
+
+            queryset = queryset.filter(category__in=all_subcategory_ids)
+
+        if keyword:
+            if type_search_keyword == 'exact':
+                queryset = queryset.filter(text_search=keyword)
+            elif type_search_keyword == 'contains':
+                queryset = queryset.filter(text_search__icontains=keyword)
+            elif type_search_keyword == 'startswith':
+                queryset = queryset.filter(text_search__istartswith=keyword)
+            elif type_search_keyword == 'endswith':
+                queryset = queryset.filter(text_search__iendswith=keyword)
             else:
-                raise ValidationError("Require brand type search in ['exact', 'contains', 'startswith', 'endswith]")
-        
+                raise ValidationError("Require keyword type search in ['exact', 'contains', 'startswith', 'endswith']")
+
+        if sort_by:
+            if sort_by == 'bestseller':
+                queryset = queryset.order_by('-sold_per_month')
+            elif sort_by == 'lowtohigh':
+                queryset = queryset.order_by('min_price')
+            elif sort_by == 'hightolow':
+                queryset = queryset.order_by('-max_price')
+            else:
+                raise ValidationError("Require sort_by in ['bestseller', 'lowtohigh', 'hightolow']")
+
         return queryset
-    
+
+    def get_all_subcategories(self, parent_category):
+        subcategories = Category.objects.filter(parent=parent_category)
+        all_subcategories = list(subcategories)
+        for subcategory in subcategories:
+            all_subcategories.extend(self.get_all_subcategories(subcategory))
+        return all_subcategories
     
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()        
+        queryset = self.get_queryset()
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = ProductSerializerOutput(page, many=True)
@@ -491,6 +652,9 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
         for param, value in params.items():
             if param in [field.name for field in Category._meta.get_fields()]:
+                if param == 'parent': 
+                    if value == 'null':
+                        value = None 
                 filter_kwargs[param] = value
         queryset = queryset.filter(status_enum=StatusEnum.ACTIVE.value, **filter_kwargs)
         return queryset
@@ -499,10 +663,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
         print("category list")
         queryset = self.filter_queryset(self.get_queryset())
 
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = CategorySerializerOutput(page, many=True)
-            return self.get_paginated_response(serializer.data)
+        # page = self.paginate_queryset(queryset)
+        # if page is not None:
+        #     serializer = CategorySerializerOutput(page, many=True)
+        #     return self.get_paginated_response(serializer.data)
 
         serializer = CategorySerializerOutput(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -804,7 +968,6 @@ class SubProductViewSet(viewsets.ModelViewSet):
             return []
         return super().get_authenticators()
 
-
     def get_permissions(self):
         print("get_permissions")
         print(self.action)
@@ -817,8 +980,10 @@ class SubProductViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action in ['update', 'partial_update']:
             return SubProductUpdateSerializer
-        elif self.action in ['list', 'retrieve']:
+        elif self.action in ['list']:
             return SubProductSerializer
+        elif self.action in ['retrieve']:
+            return SubProductSerializerForAdmin
         elif self.action in ['multiple_delete', 'multiple_destroy']:
             return IdsSubProductSerializer
         return SubProductSerializer
@@ -842,10 +1007,10 @@ class SubProductViewSet(viewsets.ModelViewSet):
         print("subProduct list")
         queryset = self.filter_queryset(self.get_queryset())
 
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = SubProductSerializerOutput(page, many=True)
-            return self.get_paginated_response(serializer.data)
+        # page = self.paginate_queryset(queryset)
+        # if page is not None:
+        #     serializer = SubProductSerializerOutput(page, many=True)
+        #     return self.get_paginated_response(serializer.data)
 
         serializer = SubProductSerializerOutput(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -984,7 +1149,7 @@ class SubProductViewSet(viewsets.ModelViewSet):
                 print("vao day")
             except Product.DoesNotExist:
                 return Response({'detail': 'Product not found'}, status=status.HTTP_403_FORBIDDEN)
-        product_subproducts = instance.products.select_related('product')
+        product_subproducts = instance.product.select_related('product')
         if len(product_subproducts) == 1: 
             product_subproduct = product_subproducts[0]
             productSubProduct = ProductSubProductSerializer(product_subproduct, data=data_productSubProduct, partial=partial)
@@ -1044,7 +1209,7 @@ class SubProductViewSet(viewsets.ModelViewSet):
         instance.status_enum = StatusEnum.DELETED.value
         instance.save()
 
-        product_subproducts = instance.products.select_related('product')
+        product_subproducts = instance.product.select_related('product')
         if len(product_subproducts) == 1: 
             product_subproduct = product_subproducts[0]
             if product_subproduct.status_enum != StatusEnum.DELETED.value:

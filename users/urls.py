@@ -1,10 +1,9 @@
 from django.urls import path, include
 from . import views
-from rest_framework.routers import DefaultRouter
-from app.views import UploadImageView
+from rest_framework.routers import SimpleRouter
 
-router = DefaultRouter()
-router.register(r'', views.UserViewSet, basename='user')
+router = SimpleRouter(trailing_slash=False)
+router.register(r'user', views.UserViewSet, basename='user')
 
 urlpatterns = [
     path('search-and', views.UserSearchView.as_view(), name='user-search-and'),

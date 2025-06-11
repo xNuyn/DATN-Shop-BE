@@ -100,6 +100,34 @@ class CompareProductViewSet(viewsets.ModelViewSet):
         except ProductSubProduct.DoesNotExist:
             return Response({'detail': 'Product mapping not found for this SubProduct'}, status=status.HTTP_400_BAD_REQUEST)
 
+        # 2.5 Kiểm tra nếu sản phẩm đã từng được so sánh
+        existing_item = CompareProduct.objects.filter(
+            user=user,
+            sub_product=sub_product,
+        ).first()
+
+        if existing_item:
+            if existing_item.status_enum == StatusEnum.DELETED.value:
+                # Kiểm tra số lượng ACTIVE trước khi khôi phục
+                active_count = CompareProduct.objects.filter(
+                    user=user,
+                    status_enum=StatusEnum.ACTIVE
+                ).count()
+
+                if active_count >= 6:
+                    return Response({"detail": "Chỉ có thể so sánh tối đa 6 sản phẩm."}, status=status.HTTP_400_BAD_REQUEST)
+
+                existing_item.status_enum = StatusEnum.ACTIVE.value
+                existing_item.save()
+                serializer = CompareProductSerializer(existing_item)
+                return Response({"compareProduct": serializer.data}, status=status.HTTP_200_OK)
+
+            else:
+                return Response(
+                    {"detail": "Sản phẩm đã có trong danh sách so sánh."},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
         # 3. Lấy category gốc của sản phẩm
         root_category = get_root_category(product.category)
 
@@ -133,6 +161,7 @@ class CompareProductViewSet(viewsets.ModelViewSet):
                 {"detail": "CompareProduct is invalid", "errors": compare_serializer.errors},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)

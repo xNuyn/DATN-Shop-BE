@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import Order, OrderDetail
-from products.serializers import SubProductSerializerOutput
+from products.serializers import SubProductSerializerForOrder
+from app.models import StatusEnum
+from payments.serializers import PaymentSerializerAdmin
 
 ##-------------Order----------------##
 class OrderSerializer(serializers.ModelSerializer):
@@ -11,14 +13,21 @@ class OrderSerializer(serializers.ModelSerializer):
 
 class OrderSerializerOutput(serializers.ModelSerializer):
     order_details = serializers.SerializerMethodField()
+    payment = serializers.SerializerMethodField()
     class Meta:
         model = Order
-        fields = ('id', 'user', 'subtotal', 'tax', 'discount', 'shipping_cost', 'total_price', 'status', 'created_at', 'status_enum', 'order_details')
+        fields = ('id', 'user', 'subtotal', 'tax', 'discount', 'shipping_cost', 'total_price', 'status', 'created_at', 'status_enum', 'payment', 'order_details')
         read_only_fields = ('id', 'created_at')
 
     def get_order_details(self, obj):
-        order_details = obj.order_details.all()
+        order_details = obj.order_details.filter(status_enum=StatusEnum.ACTIVE)
         return OrderDetailSerializerOutput(order_details, many=True).data
+    
+    def get_payment(self, obj):
+        payment = obj.payments.filter(status_enum=StatusEnum.ACTIVE).first()
+        if payment:
+            return PaymentSerializerAdmin(payment).data
+        return None
 
 class OrderUpdateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,7 +45,7 @@ class OrderDetailSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class OrderDetailSerializerOutput(serializers.ModelSerializer):
-    sub_product = SubProductSerializerOutput()
+    sub_product = SubProductSerializerForOrder()
     class Meta:
         model = OrderDetail
         fields = ('id', 'order', 'sub_product', 'quantity', 'price', 'status_enum')

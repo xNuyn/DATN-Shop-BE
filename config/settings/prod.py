@@ -1,7 +1,7 @@
 from .base import *
 import os
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost","192.168.231.205", "3148-2402-9d80-44b-6919-199-875f-9286-3ed1.ngrok-free.app"]
 
