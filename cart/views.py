@@ -87,13 +87,31 @@ class CartViewSet(viewsets.ModelViewSet):
                 sub_product = SubProduct.objects.get(id=sub_product_id)
                 data['sub_product'] = sub_product.id
             except SubProduct.DoesNotExist:
-                return Response({'detail': 'SubProduct not found'}, status=status.HTTP_403_FORBIDDEN) 
+                return Response({'detail': 'Không tìm thấy sản phẩm'}, status=status.HTTP_403_FORBIDDEN) 
+        # Check if the user already has a cart item for this sub_product
+        existing_cart = Cart.objects.filter(
+            user=user_id, 
+            sub_product=sub_product_id 
+        ).first()
+
+        if existing_cart:
+            if existing_cart.status_enum == StatusEnum.DELETED.value:
+                existing_cart.status_enum = StatusEnum.ACTIVE.value
+                existing_cart.save()
+                cart = CartSerializerOutput(existing_cart)
+                return Response({"cart": cart.data}, status=status.HTTP_200_OK)
+            else:
+                return Response(
+                    {"detail": "Bạn đã có sản phẩm này trong giỏ hàng."}, 
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
         cart = CartSerializer(data=data)
         if cart.is_valid():
             cart.save()
         else:
             return Response(
-                {"detail": "Cart is invalid",  "errors": cart.errors}, status=status.HTTP_400_BAD_REQUEST
+                {"detail": "Sản phẩm đã có trong giỏ hàng của bạn.",  "errors": cart.errors}, status=status.HTTP_400_BAD_REQUEST
             )
         return Response({"cart": cart.data}, status=status.HTTP_201_CREATED)
 
@@ -244,10 +262,10 @@ class CartViewSet(viewsets.ModelViewSet):
 
         if not cartItems.exists():
             return Response({'detail': 'No item found in my cart'}, status=status.HTTP_404_NOT_FOUND) 
-        page = self.paginate_queryset(cartItems)
-        if page is not None:
-            cartOutput = CartSerializerOutput(page, many=True)
-            return self.get_paginated_response(cartOutput.data)
+        # page = self.paginate_queryset(cartItems)
+        # if page is not None:
+        #     cartOutput = CartSerializerOutput(page, many=True)
+        #     return self.get_paginated_response(cartOutput.data)
 
         cartOutput = CartSerializerOutput(cartItems, many=True)
         return Response(cartOutput.data, status=status.HTTP_200_OK)
@@ -484,10 +502,10 @@ class WishlistViewSet(viewsets.ModelViewSet):
 
         if not wishlists.exists():
             return Response({'detail': 'No wishlist found in my cart'}, status=status.HTTP_404_NOT_FOUND)
-        page = self.paginate_queryset(wishlists)
-        if page is not None:
-            wishlistOutput = WishlistSerializerOutput(page, many=True)
-            return self.get_paginated_response(wishlistOutput.data)
+        # page = self.paginate_queryset(wishlists)
+        # if page is not None:
+        #     wishlistOutput = WishlistSerializerOutput(page, many=True)
+        #     return self.get_paginated_response(wishlistOutput.data)
         
         wishlistOutput = WishlistSerializerOutput(wishlists, many=True)
         return Response(wishlistOutput.data, status=status.HTTP_200_OK)

@@ -12,8 +12,14 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+
+GROQ_API_KEY = os.getenv("GROQQ_API_KEY")
+TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -52,6 +58,7 @@ INSTALLED_APPS = [
     'shipping',
     'discounts',
     'compare',
+    'chat_app',
 ]
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -82,6 +89,12 @@ REST_FRAMEWORK = {
         'authentication.backends.JWTAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'config.pagination.CustomPageNumberPagination',
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ],
 }
 
 ROOT_URLCONF = 'config.urls'
@@ -107,16 +120,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.getenv("DEV_DB_NAME", "dev_db"),
-        "USER": os.getenv("DEV_DB_USER", "root"),
-        "PASSWORD": os.getenv("DEV_DB_PASSWORD", "nguyen070302"),
-        "HOST": os.getenv("DEV_DB_HOST", "127.0.0.1"),
-        "PORT": os.getenv("DEV_DB_PORT", "3306"),
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": os.getenv("DEV_DB_NAME", "dev_db"),
+#         "USER": os.getenv("DEV_DB_USER", "root"),
+#         "PASSWORD": os.getenv("DEV_DB_PASSWORD", "nguyen070302"),
+#         "HOST": os.getenv("DEV_DB_HOST", "127.0.0.1"),
+#         "PORT": os.getenv("DEV_DB_PORT", "3306"),
+#     }
+# }
 
 
 # Password validation

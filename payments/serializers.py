@@ -26,6 +26,15 @@ class IdsPaymentMethodSerializer(serializers.Serializer):
     ids = serializers.ListField(child=serializers.IntegerField(), write_only=True)
 
 ##--------------Payment-------------##
+class PaymentSerializerAdmin(serializers.ModelSerializer):
+    payment_method = serializers.SerializerMethodField()
+    class Meta:
+        model = Payment
+        fields = '__all__'
+        
+    def get_payment_method(self, obj):
+        return obj.payment_method.name if obj.payment_method else None
+    
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Payment

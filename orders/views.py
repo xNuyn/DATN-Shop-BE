@@ -69,12 +69,12 @@ class OrderViewSet(viewsets.ModelViewSet):
     
     def retrieve(self, request, *args, **kwargs):
         print("order retrieve")
-        user_id = request.user.id
+        # user_id = request.user.id
         instance = self.get_object()
-        if user_id != instance.user.id:
-            return Response({
-                "detail": "You do not have permission to perform this action."
-            }, status=status.HTTP_403_FORBIDDEN)
+        # if user_id != instance.user.id:
+        #     return Response({
+        #         "detail": "You do not have permission to perform this action."
+        #     }, status=status.HTTP_403_FORBIDDEN)
         
         serializer = OrderSerializerOutput(instance)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -129,13 +129,13 @@ class OrderViewSet(viewsets.ModelViewSet):
         data = request.data.copy()
 
         user_id = request.user.id
-        if user_id != instance.user.id:
+        if user_id != instance.user.id and request.user.role!='admin':
             return Response({
                 "detail": "You do not have permission to perform this action."
             }, status=status.HTTP_403_FORBIDDEN)
         
         status_value = data.get('status', None)
-        if status_value != None and request.user.role != 'admin':
+        if status_value != None and status_value!='canceled' and request.user.role != 'admin':
             return Response({
                 "detail": "You do not have permission to change the status of this order."
             }, status=status.HTTP_403_FORBIDDEN)
@@ -238,7 +238,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'], url_path='my-orders')
     @swagger_auto_schema(
-        responses={200: OrderSerializerOutput(many=True)}
+        responses={200: OrderSerializer(many=True)}
     )
     def my_orders(self, request):
         print("order my_orders")
@@ -249,10 +249,10 @@ class OrderViewSet(viewsets.ModelViewSet):
             return Response({'detail': 'No orders found for this user'}, status=status.HTTP_404_NOT_FOUND)
         page = self.paginate_queryset(queryset)
         if page is not None:
-            serializer = OrderSerializerOutput(page, many=True)
+            serializer = OrderSerializer(page, many=True)
             return self.get_paginated_response(serializer.data)
         
-        serializer = OrderSerializerOutput(queryset, many=True)
+        serializer = OrderSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class OrderDetailViewSet(viewsets.ModelViewSet):

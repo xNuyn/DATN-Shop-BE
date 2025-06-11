@@ -51,8 +51,8 @@ class SubProduct(models.Model):
 
     old_price = models.BigIntegerField(null=True, blank=True)
     price = models.BigIntegerField(null=False)
-    color = models.CharField(max_length=10, choices=ColorChoices.choices)
-    size = models.CharField(max_length=5, choices=SizeChoices.choices)
+    color = models.CharField(max_length=100, choices=ColorChoices.choices)
+    size = models.CharField(max_length=100, choices=SizeChoices.choices)
     stock = models.PositiveIntegerField(default=0)
     image = models.TextField(null=True, blank=True)
     specification = models.TextField(null=True, blank=True)
