@@ -414,8 +414,6 @@ class ProductViewSet(viewsets.ModelViewSet):
 #         serializer = self.get_serializer(queryset, many=True)
 #         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
-
 class ProductSearchView(generics.ListAPIView):
     serializer_class = ProductSerializer
     permission_classes = []
@@ -427,6 +425,9 @@ class ProductSearchView(generics.ListAPIView):
         brands = self.request.query_params.get('brands', None)
         sort_by = self.request.query_params.get('sort_by', None)
         keyword = self.request.query_params.get('keyword', None)
+        category_name = self.request.query_params.get('category_name', None)
+        brand_name = self.request.query_params.get('brand_name', None)
+        price = self.request.query_params.get('price', None)
 
         type_search_name = self.request.query_params.get('type_search_name', None)
         type_search_description = self.request.query_params.get('type_search_description', None)
@@ -505,6 +506,54 @@ class ProductSearchView(generics.ListAPIView):
             else:
                 raise ValidationError("Require keyword type search in ['exact', 'contains', 'startswith', 'endswith']")
 
+        if category_name: 
+            try:
+                category_objs = Category.objects.filter(name__icontains=category_name)
+                all_ids = set([cat_obj.id for cat_obj in category_objs])
+                print("all_ids", all_ids)
+                for cat_obj in category_objs: 
+                    subcats = self.get_all_subcategories(cat_obj.id)
+                    all_ids.update([c.id for c in subcats])
+                print("all_ids", all_ids)
+                queryset = queryset.filter(category__in=all_ids)
+            except Category.DoesNotExist:
+                print("category_name is not found in database")
+
+        if brand_name: 
+            try:
+                brand_obj = Brand.objects.get(name__iexact=brand_name)
+                queryset = queryset.filter(brand=brand_obj.id)
+            except Brand.DoesNotExist:
+                print("brand_name is not found in database")
+
+        if price:
+            price = price.strip()
+            if price.startswith('<'):
+                try:
+                    threshold = int(price[1:].strip())
+                    queryset = queryset.filter(min_price__lt=threshold)
+                except ValueError:
+                    raise ValidationError("Invalid price format. Expected format: '< number'")
+            elif price.startswith('>'):
+                try:
+                    threshold = int(price[1:].strip())
+                    queryset = queryset.filter(max_price__gt=threshold)
+                except ValueError:
+                    raise ValidationError("Invalid price format. Expected format: '> number'")
+            else:
+                try:
+                    parts = price.split('->')
+                    if len(parts) == 2:
+                        min_val, max_val = int(parts[0]), int(parts[1])
+                        queryset = queryset.filter(
+                            min_price__gte=min_val,
+                            max_price__lte=max_val
+                        )
+                    else:
+                        raise ValidationError("Invalid price range. Expected format: 'min->max'")
+                except ValueError:
+                    raise ValidationError("Invalid price format. Expected numbers.")
+        
         if sort_by:
             if sort_by == 'bestseller':
                 queryset = queryset.order_by('-sold_per_month')

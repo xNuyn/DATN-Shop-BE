@@ -12,11 +12,11 @@ class Order(models.Model):
         CANCELED = "canceled", "Canceled"
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
-    subtotal = models.DecimalField(max_digits=10, decimal_places=2)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
-    tax = models.DecimalField(max_digits=10, decimal_places=2)
-    discount = models.DecimalField(max_digits=10, decimal_places=2)
-    shipping_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    subtotal = models.DecimalField(max_digits=20, decimal_places=2)
+    total_price = models.DecimalField(max_digits=20, decimal_places=2)
+    tax = models.DecimalField(max_digits=20, decimal_places=2)
+    discount = models.DecimalField(max_digits=20, decimal_places=2)
+    shipping_cost = models.DecimalField(max_digits=20, decimal_places=2)
     status = models.CharField(
         max_length=15, choices=OrderStatus.choices, default=OrderStatus.PENDING
     )
@@ -31,7 +31,7 @@ class OrderDetail(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="order_details")
     sub_product = models.ForeignKey(SubProduct, on_delete=models.CASCADE, related_name="order_details")
     quantity = models.PositiveIntegerField(default=1)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=20, decimal_places=2)
     status_enum = models.IntegerField(choices=StatusEnum.choices,default=StatusEnum.ACTIVE)
 
     def __str__(self):
