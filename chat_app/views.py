@@ -9,7 +9,7 @@ load_dotenv()
 # Lấy URL ngrok từ biến môi trường
 NGROK_CHAT_URL = os.getenv(
     "NGROK_CHAT_URL",
-    "https://abd9-2402-800-629c-6da3-e40b-f3d6-264-cedc.ngrok-free.app/chat"
+    "https://f91d-2402-9d80-403-4c08-9063-98b5-9b80-e0dc.ngrok-free.app/chat"
 )
 
 @csrf_exempt
