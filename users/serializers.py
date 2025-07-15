@@ -10,8 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
 class UserSerializerOutput(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'user_name', 'full_name', 'email', 'avatar', 'phone', 'address', 'region', 'address_billing', 'zip_code', 'note')
-        read_only_fields = ('id', 'created_at', 'role')
+        fields = ('id', 'user_name', 'full_name', 'email', 'avatar', 'phone', 'address', 'region', 'address_billing', 'zip_code', 'note', 'role')
+        read_only_fields = ('id', 'created_at')
         
 class UserUpdateSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)
